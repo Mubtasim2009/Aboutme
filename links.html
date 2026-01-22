@@ -26,7 +26,8 @@
     html, body { 
       height: 100%; 
       margin: 0; 
-      padding: 0; 
+      padding: 0;
+      overflow-x: hidden;
     }
     
     body, #bg { 
@@ -73,25 +74,18 @@
       position: absolute;
       top: 0;
       visibility: hidden;
-      width: 150%;
-      will-change: opacity, transform;
-      transform: translateX(0);
+      width: 100%;
+      will-change: opacity;
     }
     
     #bg div.visible {
       opacity: 1;
       visibility: visible;
       z-index: 1;
-      animation: bgSlide 20s linear infinite;
     }
     
     #bg div.visible.top { 
       z-index: 2; 
-    }
-    
-    @keyframes bgSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-25%); }
     }
     
     body.is-preload #bg { 

@@ -45,8 +45,9 @@ Aboutme/
 │   │   ├── 5.webp
 │   │   └── 6.webp
 │   └── brand/          # Logo and branding assets
-│       ├── ICON.webp
-│       └── LOGO2.webp
+│       ├── ICON.webp   # Favicon and metadata image
+│       ├── LOGO.webp   # Alternative logo
+│       └── LOGO2.webp  # Footer logo
 ├── sitemap.xml         # XML sitemap for SEO
 ├── LICENSE             # GPL-3.0 License
 └── README.md           # This file

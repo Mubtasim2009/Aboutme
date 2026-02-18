@@ -609,7 +609,7 @@
   </script>
     </script>
   
-  <!-- AI Chat Widget -->
+    <!-- AI Chat Widget -->
   <div id="chat-widget">
     <button id="chat-toggle">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -620,25 +620,40 @@
     
     <div id="chat-box">
       <div id="chat-header">
-        <span>Ask Me Anything 🤖</span>
+        <div>
+          <span style="font-size: 1.1em;">💬 Chat with Moonim's AI</span>
+          <div style="font-size: 0.75em; opacity: 0.8; margin-top: 2px;">Powered by Cloudflare Workers AI</div>
+        </div>
         <button id="close-chat">×</button>
       </div>
       
       <div id="chat-messages">
         <div class="message bot">
-          Hi! I'm Moonim's AI assistant. Ask me anything about my profile, skills, projects, or social links! 👋
+          Hey there! 👋 I'm Moonim's AI assistant, powered by cutting-edge tech! 🚀<br><br>
+          Ask me anything about:
+          <ul style="margin: 8px 0 0 0; padding-left: 20px; font-size: 0.95em;">
+            <li>🎯 Skills & projects</li>
+            <li>🔗 Social media & contacts</li>
+            <li>🎓 Certifications</li>
+            <li>🎵 Music taste & hobbies</li>
+          </ul>
         </div>
       </div>
       
       <div id="chat-input-container">
-        <input type="text" id="chat-input" placeholder="Type your message...">
-        <button id="send-btn">Send</button>
+        <input type="text" id="chat-input" placeholder="Ask me anything...">
+        <button id="send-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
   <style>
-    /* Chat Widget Styles */
+    /* Chat Widget Styles - Glassmorphism Edition */
     #chat-widget {
       position: fixed;
       bottom: 20px;
@@ -647,44 +662,70 @@
     }
 
     #chat-toggle {
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
+      background: linear-gradient(135deg, rgba(79, 142, 247, 0.9) 0%, rgba(102, 126, 234, 0.9) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 32px rgba(79, 142, 247, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 8px 32px rgba(79, 142, 247, 0.35);
+      }
+      50% {
+        box-shadow: 0 8px 40px rgba(79, 142, 247, 0.5);
+      }
     }
 
     #chat-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 12px 48px rgba(79, 142, 247, 0.5);
+      animation: none;
     }
 
     #chat-toggle svg {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       fill: white;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
     #chat-box {
       display: none;
       position: fixed;
-      bottom: 90px;
+      bottom: 100px;
       right: 20px;
-      width: 350px;
-      height: 500px;
-      background: rgba(21, 23, 38, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 380px;
+      height: 550px;
+      background: rgba(21, 23, 38, 0.85);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255, 255, 255, 0.2);
       flex-direction: column;
       overflow: hidden;
+      animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     #chat-box.open {
@@ -692,28 +733,40 @@
     }
 
     #chat-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 15px 20px;
+      background: linear-gradient(135deg, rgba(79, 142, 247, 0.25) 0%, rgba(102, 126, 234, 0.25) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 18px 20px;
       color: white;
-      font-family: 'Inter', 'Outfit', sans-serif;
+      font-family: 'Outfit', 'Inter', sans-serif;
       font-weight: 600;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 20px rgba(79, 142, 247, 0.15);
     }
 
     #close-chat {
-      background: none;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
       color: white;
       font-size: 24px;
       cursor: pointer;
       padding: 0;
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    #close-chat:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
     }
 
     #chat-messages {
@@ -722,101 +775,146 @@
       padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, transparent 100%);
     }
 
     #chat-messages::-webkit-scrollbar {
-      width: 6px;
+      width: 8px;
     }
 
     #chat-messages::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
     }
 
     #chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
+      background: rgba(79, 142, 247, 0.3);
+      border-radius: 10px;
+      border: 2px solid rgba(21, 23, 38, 0.8);
+    }
+
+    #chat-messages::-webkit-scrollbar-thumb:hover {
+      background: rgba(79, 142, 247, 0.5);
     }
 
     .message {
-      max-width: 80%;
-      padding: 12px 16px;
-      border-radius: 16px;
+      max-width: 85%;
+      padding: 14px 18px;
+      border-radius: 18px;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-      animation: slideIn 0.3s ease;
+      font-size: 14.5px;
+      line-height: 1.6;
+      animation: messageSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
 
-    @keyframes slideIn {
+    @keyframes messageSlideIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px) scale(0.95);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
     .message.user {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, rgba(79, 142, 247, 0.95) 0%, rgba(102, 126, 234, 0.95) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: white;
       align-self: flex-end;
-      border-bottom-right-radius: 4px;
+      border-bottom-right-radius: 6px;
+      box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
     }
 
     .message.bot {
-      background: rgba(255, 255, 255, 0.1);
-      color: #e0eaff;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e8f0ff;
       align-self: flex-start;
-      border-bottom-left-radius: 4px;
+      border-bottom-left-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .message.bot a {
+      color: #7fa9ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(127, 169, 255, 0.3);
+      transition: all 0.2s;
+    }
+
+    .message.bot a:hover {
       color: #a0c4ff;
-      text-decoration: underline;
+      border-bottom-color: #a0c4ff;
     }
 
     #chat-input-container {
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
 
     #chat-input {
       flex: 1;
-      padding: 12px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: white;
       font-family: 'Inter', sans-serif;
       font-size: 14px;
       outline: none;
+      transition: all 0.3s;
+    }
+
+    #chat-input:focus {
+      border-color: rgba(79, 142, 247, 0.5);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.1);
     }
 
     #chat-input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.45);
     }
 
     #send-btn {
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      border-radius: 20px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(79, 142, 247, 0.9) 0%, rgba(102, 126, 234, 0.9) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
       color: white;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-family: 'Inter', sans-serif;
       font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
     }
 
-    #send-btn:hover {
-      transform: scale(1.05);
+    #send-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 25px rgba(79, 142, 247, 0.45);
+    }
+
+    #send-btn:active:not(:disabled) {
+      transform: translateY(0) scale(0.98);
     }
 
     #send-btn:disabled {
@@ -826,21 +924,26 @@
 
     .typing-indicator {
       display: flex;
-      gap: 4px;
-      padding: 12px 16px;
-      max-width: 60px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      border-bottom-left-radius: 4px;
+      gap: 6px;
+      padding: 16px 20px;
+      max-width: 70px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      border-bottom-left-radius: 6px;
       align-self: flex-start;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .typing-indicator span {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      animation: typing 1.4s infinite;
+      background: linear-gradient(135deg, #4f8ef7 0%, #667eea 100%);
+      animation: typing 1.4s infinite ease-in-out;
+      box-shadow: 0 2px 6px rgba(79, 142, 247, 0.4);
     }
 
     .typing-indicator span:nth-child(2) {
@@ -853,11 +956,11 @@
 
     @keyframes typing {
       0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.5;
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
       }
       30% {
-        transform: translateY(-10px);
+        transform: translateY(-12px) scale(1.1);
         opacity: 1;
       }
     }
@@ -869,30 +972,29 @@
       }
 
       #chat-toggle {
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
       }
 
       #chat-toggle svg {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
       }
 
       #chat-box {
         width: calc(100vw - 30px);
-        height: calc(100vh - 100px);
+        height: calc(100vh - 110px);
         right: 15px;
-        bottom: 75px;
+        bottom: 82px;
       }
     }
   </style>
 
   <script>
     // ========================================
-    // AI CHAT WIDGET SCRIPT
+    // AI CHAT WIDGET SCRIPT - Enhanced Edition
     // ========================================
     
-    // Replace with your deployed Cloudflare Worker URL
     const WORKER_URL = 'https://moonim-ai-assistant.mubtasim32.workers.dev';
 
     const chatToggle = document.getElementById('chat-toggle');
@@ -902,6 +1004,9 @@
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
 
+    // Fun responses for various greetings
+    const greetings = ['hey', 'hi', 'hello', 'sup', 'yo', 'hola', 'greetings'];
+    
     // Toggle chat
     chatToggle.addEventListener('click', () => {
       chatBox.classList.toggle('open');
@@ -942,13 +1047,27 @@
         removeTyping(typingId);
 
         if (data.success) {
-          addMessage(data.response, 'bot');
+          // Add some personality to responses
+          let formattedResponse = data.response;
+          
+          // Add emojis based on keywords
+          if (formattedResponse.includes('email') || formattedResponse.includes('contact')) {
+            formattedResponse += ' 📧';
+          } else if (formattedResponse.includes('GitHub') || formattedResponse.includes('github')) {
+            formattedResponse += ' 💻';
+          } else if (formattedResponse.includes('music')) {
+            formattedResponse += ' 🎵';
+          } else if (formattedResponse.includes('cybersecurity') || formattedResponse.includes('security')) {
+            formattedResponse += ' 🔐';
+          }
+          
+          addMessage(formattedResponse, 'bot');
         } else {
-          addMessage('Sorry, I encountered an error. Please try again!', 'bot');
+          addMessage('Oops! 😅 Something went wrong on my end. Mind trying that again?', 'bot');
         }
       } catch (error) {
         removeTyping(typingId);
-        addMessage('Sorry, I could not connect. Please try again later!', 'bot');
+        addMessage('Hmm, seems like I lost connection! 🔌 Give it another shot in a sec!', 'bot');
       }
 
       sendBtn.disabled = false;
@@ -959,7 +1078,7 @@
       const messageDiv = document.createElement('div');
       messageDiv.className = `message ${sender}`;
       
-      // Convert URLs to links
+      // Convert URLs to clickable links
       const linkedText = text.replace(
         /(https?:\/\/[^\s]+)/g,
         '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
@@ -991,11 +1110,17 @@
     chatInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    // Add a subtle shake animation on first load to draw attention
+    setTimeout(() => {
+      chatToggle.style.animation = 'pulse 2s infinite, shake 0.5s';
+    }, 2000);
   </script>
 
 </body>
 </html>
 </body>
 </html>
+
 
 
